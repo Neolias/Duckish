@@ -3,14 +3,12 @@
 
 #include "BasePawn.h"
 
-#include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "EnhancedInputSubsystems.h"
 #include "Duckish/Components/CharacterComponents/BasePawnMovement.h"
 
-// Sets default values
 ABasePawn::ABasePawn()
 {
- 	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 	USceneComponent* DefaultRoot = CreateDefaultSubobject<USceneComponent>(TEXT("DefaultRoot"));
@@ -25,30 +23,29 @@ ABasePawn::ABasePawn()
 		SkeletalMesh->SetOwnerNoSee(true);
 		SkeletalMesh->bCastHiddenShadow = true;
 	}
-	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("FPCamera"));
-	Camera->SetupAttachment(SkeletalMesh, CameraSocket);
-	Camera->bUsePawnControlRotation = true;
-
+	bUseControllerRotationYaw = true;
+	bUseControllerRotationPitch = true;
 }
 
-// Called when the game starts or when spawned
-void ABasePawn::BeginPlay()
+void ABasePawn::Move(const FInputActionValue& Value)
 {
-	Super::BeginPlay();
-	
+	const FVector MovementVector = Value.Get<FVector>();
+
+	if (Controller != nullptr)
+	{
+		AddMovementInput(GetActorForwardVector(), MovementVector.Y);
+		AddMovementInput(GetActorRightVector(), MovementVector.X);
+		AddMovementInput(GetActorUpVector(), MovementVector.Z);
+	}
 }
 
-// Called every frame
-void ABasePawn::Tick(float DeltaTime)
+void ABasePawn::Look(const FInputActionValue& Value)
 {
-	Super::Tick(DeltaTime);
+	const FVector2D LookAxisVector = Value.Get<FVector2D>();
 
+	if (Controller != nullptr)
+	{
+		AddControllerYawInput(LookAxisVector.X);
+		AddControllerPitchInput(LookAxisVector.Y);
+	}
 }
-
-// Called to bind functionality to input
-void ABasePawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
-}
-

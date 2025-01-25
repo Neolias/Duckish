@@ -6,6 +6,9 @@
 #include "GameFramework/Pawn.h"
 #include "BasePawn.generated.h"
 
+struct FInputActionValue;
+class UInputAction;
+
 UCLASS()
 class DUCKISH_API ABasePawn : public APawn
 {
@@ -13,21 +16,16 @@ class DUCKISH_API ABasePawn : public APawn
 
 public:
 	ABasePawn();
-	virtual void Tick(float DeltaTime) override;
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 protected:
-	virtual void BeginPlay() override;
+	virtual void Move(const FInputActionValue& Value);
+	virtual void Look(const FInputActionValue& Value);
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (Category = "Components"))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (Category = Components))
 	class UBasePawnMovement* BasePawnMovement;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (Category = "Components"))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (Category = Components))
 	class UCapsuleComponent* CapsuleCollision;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (Category = "Components"))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (Category = Components))
 	USkeletalMeshComponent* SkeletalMesh;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (Category = "Components"))
-	class UCameraComponent* Camera;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (Category = "Components | Camera"))
-	FName CameraSocket = FName("CameraSocket");
 
 };
