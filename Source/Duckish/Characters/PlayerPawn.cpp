@@ -11,7 +11,7 @@ APlayerPawn::APlayerPawn()
 {
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	Camera->SetupAttachment(SkeletalMesh, CameraSocket);
-	//Camera->bUsePawnControlRotation = true;
+	Camera->bUsePawnControlRotation = true;
 }
 
 void APlayerPawn::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
@@ -22,6 +22,7 @@ void APlayerPawn::SetupPlayerInputComponent(class UInputComponent* PlayerInputCo
 	{
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &APlayerPawn::Move);
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &APlayerPawn::Look);
+		EnhancedInputComponent->BindAction(ShootAction, ETriggerEvent::Ongoing, this, &APlayerPawn::Shoot);
 	}
 	else
 	{

@@ -5,6 +5,7 @@
 
 #include "Components/CapsuleComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "Actors/Equipment/Trident.h"
 #include "Duckish/Components/CharacterComponents/BasePawnMovement.h"
 
 ABasePawn::ABasePawn()
@@ -29,6 +30,13 @@ void ABasePawn::BeginPlay()
 {
 	Super::BeginPlay();
 
+	if (IsValid(SkeletalMesh) && IsValid(WeaponClass))
+	{
+		FActorSpawnParameters SpawnParameters;
+		SpawnParameters.Owner = this;
+		CurrentWeapon = GetWorld()->SpawnActor<AEquipmentItem>(WeaponClass, FVector::ZeroVector, FRotator::ZeroRotator, SpawnParameters);
+		CurrentWeapon->AttachToComponent(SkeletalMesh, FAttachmentTransformRules::KeepRelativeTransform, WeaponSocketName);
+	}
 }
 
 void ABasePawn::Move(const FInputActionValue& Value)
@@ -51,5 +59,23 @@ void ABasePawn::Look(const FInputActionValue& Value)
 	{
 		AddControllerYawInput(LookAxisVector.X);
 		AddControllerPitchInput(LookAxisVector.Y);
+	}
+}
+
+void ABasePawn::Shoot(const FInputActionValue& Value)
+{
+	const bool bIsHeld = Value.Get<bool>();
+
+	ATrident* Trident = Cast<ATrident>(CurrentWeapon);
+	if (IsValid(Trident))
+	{
+		if (bIsHeld)
+		{
+			Trident->StartFire();
+		}
+		else
+		{
+			Trident->StopFire();
+		}
 	}
 }

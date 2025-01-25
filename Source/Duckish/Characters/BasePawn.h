@@ -23,6 +23,7 @@ public:
 protected:
 	virtual void Move(const FInputActionValue& Value);
 	virtual void Look(const FInputActionValue& Value);
+	virtual void Shoot(const FInputActionValue& Value);
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (Category = Components))
 	class UBasePawnMovement* BasePawnMovement;
@@ -31,9 +32,11 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (Category = Components))
 	USkeletalMeshComponent* SkeletalMesh;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (Category = Equipment))
-	TSubclassOf<AEquipmentItem> Weapon = AEquipmentItem::StaticClass();
+	TSubclassOf<AEquipmentItem> WeaponClass = AEquipmentItem::StaticClass();
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (Category = Equipment))
 	FName WeaponSocketName = FName("WeaponSocket");
 
+private:
+	TObjectPtr<AEquipmentItem> CurrentWeapon;
 
 };
