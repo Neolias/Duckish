@@ -11,7 +11,7 @@ APlayerPawn::APlayerPawn()
 {
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	Camera->SetupAttachment(SkeletalMesh, CameraSocket);
-	Camera->bUsePawnControlRotation = true;
+	//Camera->bUsePawnControlRotation = true;
 }
 
 void APlayerPawn::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)

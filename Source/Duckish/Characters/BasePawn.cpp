@@ -11,11 +11,10 @@ ABasePawn::ABasePawn()
 {
 	PrimaryActorTick.bCanEverTick = true;
 
-	USceneComponent* DefaultRoot = CreateDefaultSubobject<USceneComponent>(TEXT("DefaultRoot"));
-	BasePawnMovement = CreateDefaultSubobject<UBasePawnMovement>(TEXT("BasePawnMovement"));
-	BasePawnMovement->SetUpdatedComponent(DefaultRoot);
 	CapsuleCollision = CreateDefaultSubobject<UCapsuleComponent>(TEXT("CapsuleCollision"));
-	CapsuleCollision->SetupAttachment(DefaultRoot);
+	SetRootComponent(CapsuleCollision);
+	BasePawnMovement = CreateDefaultSubobject<UBasePawnMovement>(TEXT("BasePawnMovement"));
+	BasePawnMovement->SetUpdatedComponent(CapsuleCollision);
 	SkeletalMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("SkeletalMesh"));
 	SkeletalMesh->SetupAttachment(CapsuleCollision);
 	SkeletalMesh->SetOnlyOwnerSee(true);
