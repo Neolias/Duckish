@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Actors/Projectiles/DuckishProjectile.h"
+#include "DuckishProjectile.h"
 #include "BubbleProjectile.generated.h"
 
 /**

@@ -16,6 +16,7 @@ class DUCKISH_API ABasePawn : public APawn
 
 public:
 	ABasePawn();
+	USkeletalMeshComponent* GetSkeletalMesh() const { return SkeletalMesh; }
 
 protected:
 	virtual void Move(const FInputActionValue& Value);

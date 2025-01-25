@@ -1,27 +1,32 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Actors/Equipment/EquipmentItem.h"
+#include "EquipmentItem.h"
 
-// Sets default values
+#include "Characters/BasePawn.h"
+
 AEquipmentItem::AEquipmentItem()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
 }
 
-// Called when the game starts or when spawned
-void AEquipmentItem::BeginPlay()
+void AEquipmentItem::SetOwner(AActor* NewOwner)
 {
-	Super::BeginPlay();
-	
-}
+	Super::SetOwner(NewOwner);
 
-// Called every frame
-void AEquipmentItem::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
 
+	if (IsValid(NewOwner))
+	{
+		checkf(GetOwner()->IsA<ABasePawn>(), TEXT("EquipmentItem object should be owned by ABasePawn."))
+			CachedBasePawn = StaticCast<ABasePawn*>(GetOwner());
+		if (GetLocalRole() == ROLE_Authority)
+		{
+			SetAutonomousProxy(true);
+		}
+	}
+	else
+	{
+		CachedBasePawn = nullptr;
+	}
 }
 

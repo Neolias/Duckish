@@ -18,7 +18,7 @@ public:
 
 	ADuckishProjectile();
 	void SetProjectileActive(bool bIsActive);
-	virtual void Launch(FVector Direction, FVector ProjectileResetLocation = FVector::ZeroVector);
+	virtual void Launch(FVector Direction);
 
 protected:
 	virtual void BeginPlay() override;

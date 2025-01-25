@@ -13,10 +13,10 @@ ADuckishProjectile::ADuckishProjectile()
 	CollisionComponent = CreateDefaultSubobject<USphereComponent>(TEXT("CollisionComponent"));
 	CollisionComponent->SetCollisionProfileName("BlockAllDynamic");
 	CollisionComponent->InitSphereRadius(5.f);
-	RootComponent = CollisionComponent;
+	SetRootComponent(CollisionComponent);
 
 	StaticMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMeshComponent"));
-	StaticMeshComponent->SetupAttachment(RootComponent);
+	StaticMeshComponent->SetupAttachment(CollisionComponent);
 	StaticMeshComponent->SetIsReplicated(true);
 
 	ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovementComponent"));
@@ -66,7 +66,7 @@ void ADuckishProjectile::SetProjectileActive(bool bIsActive)
 	StaticMeshComponent->SetVisibility(bIsActive, true);
 }
 
-void ADuckishProjectile::Launch(FVector Direction, FVector ProjectileResetLocation)
+void ADuckishProjectile::Launch(FVector Direction)
 {
 	CollisionComponent->IgnoreActorWhenMoving(GetOwningPawn(), true);
 	ProjectileMovementComponent->MaxSpeed = MaxSpeed;
