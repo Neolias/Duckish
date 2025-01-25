@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Actors/Equipment/EquipmentItem.h"
 #include "GameFramework/Pawn.h"
 #include "BasePawn.generated.h"
 
@@ -16,6 +17,7 @@ class DUCKISH_API ABasePawn : public APawn
 
 public:
 	ABasePawn();
+	void BeginPlay() override;
 	USkeletalMeshComponent* GetSkeletalMesh() const { return SkeletalMesh; }
 
 protected:
@@ -28,5 +30,10 @@ protected:
 	class UCapsuleComponent* CapsuleCollision;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (Category = Components))
 	USkeletalMeshComponent* SkeletalMesh;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (Category = Equipment))
+	TSubclassOf<AEquipmentItem> Weapon = AEquipmentItem::StaticClass();
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (Category = Equipment))
+	FName WeaponSocketName = FName("WeaponSocket");
+
 
 };

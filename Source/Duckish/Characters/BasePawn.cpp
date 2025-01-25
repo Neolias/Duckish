@@ -25,6 +25,12 @@ ABasePawn::ABasePawn()
 	bUseControllerRotationPitch = true;
 }
 
+void ABasePawn::BeginPlay()
+{
+	Super::BeginPlay();
+
+}
+
 void ABasePawn::Move(const FInputActionValue& Value)
 {
 	const FVector MovementVector = Value.Get<FVector>();
