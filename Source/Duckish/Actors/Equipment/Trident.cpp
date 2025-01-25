@@ -5,6 +5,7 @@
 
 #include "Characters/BasePawn.h"
 #include "Engine/DamageEvents.h"
+#include "Kismet/GameplayStatics.h"
 
 ATrident::ATrident()
 {
@@ -54,6 +55,11 @@ void ATrident::MakeOneShot()
 		{
 			SkeletalMesh->PlayAnimation(PawnFireMontage, false);
 		}
+	}
+
+	if (IsValid(FireSound))
+	{
+		UGameplayStatics::SpawnSoundAttached(FireSound, RootComponent);
 	}
 
 	ShootProjectile();
@@ -112,6 +118,12 @@ void ATrident::ProcessProjectileHit(ADuckishProjectile* Projectile, const FVecto
 	{
 		DamagedActor->TakeDamage(Damage, DamageEvent, CachedBasePawn->GetController(), CachedBasePawn);
 	}
+
+	if (IsValid(HitSound))
+	{
+		UGameplayStatics::SpawnSoundAtLocation(GetWorld(), HitSound, Projectile->GetActorLocation());
+	}
+
 	Projectile->OnCollisionComponentHitEvent.RemoveAll(this);
 	Projectile->Destroy();
 }

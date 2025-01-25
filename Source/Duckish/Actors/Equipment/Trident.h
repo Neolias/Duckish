@@ -32,6 +32,11 @@ protected:
 	float Damage = 1.f;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Trident | Animations")
 	UAnimMontage* PawnFireMontage;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Trident | Audio")
+	USoundBase* FireSound;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Trident | Audio")
+	USoundBase* HitSound;
+
 
 	UFUNCTION()
 	void MakeOneShot();
