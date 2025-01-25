@@ -21,11 +21,11 @@ protected:
 	virtual void Move(const FInputActionValue& Value);
 	virtual void Look(const FInputActionValue& Value);
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (Category = Components))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (Category = Components))
 	class UBasePawnMovement* BasePawnMovement;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (Category = Components))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (Category = Components))
 	class UCapsuleComponent* CapsuleCollision;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (Category = Components))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (Category = Components))
 	USkeletalMeshComponent* SkeletalMesh;
 
 };

@@ -21,15 +21,15 @@ public:
 protected:
 	virtual void NotifyControllerChanged() override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (Category = Components))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (Category = Components))
 	class UCameraComponent* Camera;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (Category = Camera))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (Category = Camera))
 	FName CameraSocket = FName("CameraSocket");
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Input)
 	class UInputMappingContext* DefaultMappingContext;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Input)
 	UInputAction* MoveAction;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Input)
 	UInputAction* LookAction;
 };

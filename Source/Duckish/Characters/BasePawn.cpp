@@ -18,11 +18,10 @@ ABasePawn::ABasePawn()
 	CapsuleCollision->SetupAttachment(DefaultRoot);
 	SkeletalMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("SkeletalMesh"));
 	SkeletalMesh->SetupAttachment(CapsuleCollision);
-	if (IsValid(SkeletalMesh))
-	{
-		SkeletalMesh->SetOwnerNoSee(true);
-		SkeletalMesh->bCastHiddenShadow = true;
-	}
+	SkeletalMesh->SetOnlyOwnerSee(true);
+	SkeletalMesh->bCastDynamicShadow = false;
+	SkeletalMesh->CastShadow = false;
+
 	bUseControllerRotationYaw = true;
 	bUseControllerRotationPitch = true;
 }
