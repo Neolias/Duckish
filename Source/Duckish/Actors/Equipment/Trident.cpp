@@ -16,7 +16,7 @@ ATrident::ATrident()
 
 void ATrident::StartFire()
 {
-	if (!IsValid(CachedBasePawn) || !bIsFiring)
+	if (!IsValid(CachedBasePawn) || bIsFiring)
 	{
 		return;
 	}
@@ -24,7 +24,8 @@ void ATrident::StartFire()
 	if (CachedBasePawn->IsLocallyControlled())
 	{
 		GetWorld()->GetTimerManager().ClearTimer(OneShotTimer);
-		GetWorld()->GetTimerManager().SetTimer(OneShotTimer, [this]() { MakeOneShot(); }, 60.f / FireRate, true);
+		float FirePeriod = 60.f / FireRate;
+		GetWorld()->GetTimerManager().SetTimer(OneShotTimer, [this]() { MakeOneShot(); }, FirePeriod, true, -FirePeriod);
 	}
 
 	bIsFiring = true;
@@ -36,6 +37,7 @@ void ATrident::StopFire()
 	{
 		GetWorld()->GetTimerManager().ClearTimer(OneShotTimer);
 	}
+	bIsFiring = false;
 }
 
 void ATrident::MakeOneShot()
@@ -53,6 +55,8 @@ void ATrident::MakeOneShot()
 			SkeletalMesh->PlayAnimation(PawnFireMontage, false);
 		}
 	}
+
+	ShootProjectile();
 
 	GetWorld()->GetTimerManager().SetTimer(OnShotEndTimer, this, &ATrident::OnShotEnd, 60.f / FireRate, false);
 }
@@ -84,7 +88,7 @@ void ATrident::ShootProjectile()
 	ADuckishProjectile* Projectile = GetWorld()->SpawnActor<ADuckishProjectile>(ProjectileClass, SpawnLocation, FRotator::ZeroRotator, SpawnParameters);
 
 	Projectile->OnCollisionComponentHitEvent.AddDynamic(this, &ATrident::ProcessProjectileHit);
-
+	Projectile->SetProjectileActive(true);
 	Projectile->Launch(ViewPointRotation.Vector());
 }
 
@@ -109,4 +113,5 @@ void ATrident::ProcessProjectileHit(ADuckishProjectile* Projectile, const FVecto
 		DamagedActor->TakeDamage(Damage, DamageEvent, CachedBasePawn->GetController(), CachedBasePawn);
 	}
 	Projectile->OnCollisionComponentHitEvent.RemoveAll(this);
+	Projectile->Destroy();
 }

@@ -64,12 +64,12 @@ void ABasePawn::Look(const FInputActionValue& Value)
 
 void ABasePawn::Shoot(const FInputActionValue& Value)
 {
-	const bool bIsHeld = Value.Get<bool>();
+	const bool bIsKeyHeld = Value.Get<bool>();
 
 	ATrident* Trident = Cast<ATrident>(CurrentWeapon);
 	if (IsValid(Trident))
 	{
-		if (bIsHeld)
+		if (bIsKeyHeld)
 		{
 			Trident->StartFire();
 		}

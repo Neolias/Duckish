@@ -33,18 +33,18 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Trident | Animations")
 	UAnimMontage* PawnFireMontage;
 
+	UFUNCTION()
+	void MakeOneShot();
+	UFUNCTION()
+	void OnShotEnd();
+	UFUNCTION()
+	void ProcessProjectileHit(ADuckishProjectile* Projectile, const FVector MovementDirection, const FHitResult& Hit);
+
 private:
 	FTimerHandle OneShotTimer;
 	FTimerHandle OnShotEndTimer;
 	bool bIsFiring = false;
 
-	UFUNCTION()
-	void MakeOneShot();
-	UFUNCTION()
-	void OnShotEnd();
 	void ShootProjectile();
-	APawn* GetOwningPawn();
-	UFUNCTION()
-	void ProcessProjectileHit(ADuckishProjectile* Projectile, const FVector MovementDirection, const FHitResult& Hit);
-	
+	APawn* GetOwningPawn();	
 };
