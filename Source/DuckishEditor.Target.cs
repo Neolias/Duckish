@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class DuckishEditorTarget : TargetRules
 {
-	public DuckishEditorTarget(TargetInfo Target) : base(Target)
+	public DuckishEditorTarget( TargetInfo Target) : base(Target)
 	{
 		Type = TargetType.Editor;
 		DefaultBuildSettings = BuildSettingsVersion.V5;
