@@ -25,7 +25,7 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (Category = "PatrolArea | Generation", ClampMin = 1.f, UIMin = 1.f))
 	float AreaRadius = 10000.f;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (Category = "PatrolArea | Generation", ClampMin = 1.f, UIMin = 1.f))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (Category = "PatrolArea | Generation", ClampMin = 1, UIMin = 1))
 	int NumberOfWaypoints = 100.f;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (Category = "PatrolArea | Generation"))
 	TSubclassOf<AWaypoint> WaypointClass = AWaypoint::StaticClass();

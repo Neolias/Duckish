@@ -18,7 +18,6 @@ ABasePawn::ABasePawn()
 	BasePawnMovement->SetUpdatedComponent(CapsuleCollision);
 	SkeletalMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("SkeletalMesh"));
 	SkeletalMesh->SetupAttachment(CapsuleCollision);
-	SkeletalMesh->SetOnlyOwnerSee(true);
 	SkeletalMesh->bCastDynamicShadow = false;
 	SkeletalMesh->CastShadow = false;
 
