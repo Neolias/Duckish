@@ -15,7 +15,9 @@ class DUCKISH_API APatrolArea : public AActor
 public:	
 	APatrolArea();
 	TArray<AWaypoint*>* GetValidWaypoints() { return &ValidWaypoints; }
-	AWaypoint* GetRandomWaypoint() const;
+	UFUNCTION(BlueprintCallable)
+	AWaypoint* GetRandomWaypoint();
+	UFUNCTION(BlueprintCallable)
 	void CheckOutWaypoint(AWaypoint* Waypoint);
 
 protected:

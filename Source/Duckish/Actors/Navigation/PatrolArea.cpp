@@ -11,9 +11,9 @@ APatrolArea::APatrolArea()
 	PrimaryActorTick.bCanEverTick = false;
 }
 
-AWaypoint* APatrolArea::GetRandomWaypoint() const
+AWaypoint* APatrolArea::GetRandomWaypoint()
 {
-	const int Index = FMath::RandRange(0, NumberOfWaypoints);
+	const int Index = FMath::RandRange(0, ValidWaypoints.Num() - 1);
 	return ValidWaypoints[Index];
 }
 
