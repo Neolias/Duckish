@@ -16,6 +16,7 @@ class DUCKISH_API APlayerPawn : public ABasePawn
 
 public:
 	APlayerPawn();
+	virtual void BeginPlay() override;
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 protected:
@@ -33,4 +34,5 @@ protected:
 	UInputAction* LookAction;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Input)
 	UInputAction* ShootAction;
+
 };

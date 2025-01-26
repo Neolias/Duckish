@@ -13,8 +13,13 @@ APatrolArea::APatrolArea()
 
 AWaypoint* APatrolArea::GetRandomWaypoint()
 {
-	const int Index = FMath::RandRange(0, ValidWaypoints.Num() - 1);
-	return ValidWaypoints[Index];
+	if (!ValidWaypoints.IsEmpty())
+	{
+		const int Index = FMath::RandRange(0, ValidWaypoints.Num() - 1);
+		return ValidWaypoints[Index];
+	}
+
+	return nullptr;
 }
 
 void APatrolArea::CheckOutWaypoint(AWaypoint* Waypoint)
