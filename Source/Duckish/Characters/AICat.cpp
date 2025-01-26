@@ -4,6 +4,7 @@
 #include "AICat.h"
 
 #include "Components/CapsuleComponent.h"
+#include "Components/CharacterComponents/BasePawnMovement.h"
 
 
 void AAICat::Tick(float DeltaSeconds)
@@ -31,11 +32,12 @@ void AAICat::OnDamageTaken(AActor* DamagedActor, float Damage, const UDamageType
 void AAICat::TriggerDeath_Implementation()
 {
 	bIsEmerging = true;
+	CapsuleCollision->SetSimulatePhysics(true);
+	BasePawnMovement->MaxSpeed = 0.f;
 	GetWorldTimerManager().SetTimer(EmergeTimerHandle, [this] {OnDeath(); }, DeathEmergeLength, false);
 }
 
 void AAICat::OnDeath()
 {
-	bIsEmerging = false;
 	Destroy();
 }

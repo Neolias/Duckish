@@ -15,7 +15,8 @@ AWaypoint* APatrolArea::GetRandomWaypoint()
 {
 	if (!ValidWaypoints.IsEmpty())
 	{
-		return ValidWaypoints.Last();
+		const int Index = FMath::RandRange(0, ValidWaypoints.Num() - 1);
+		return ValidWaypoints[Index];
 	}
 
 	return nullptr;
@@ -23,7 +24,7 @@ AWaypoint* APatrolArea::GetRandomWaypoint()
 
 void APatrolArea::CheckOutWaypoint(AWaypoint* Waypoint)
 {
-	if (ValidWaypoints.Contains(Waypoint))
+	if (IsValid(Waypoint) && ValidWaypoints.Contains(Waypoint))
 	{
 		ValidWaypoints.RemoveSingleSwap(Waypoint);
 	}
