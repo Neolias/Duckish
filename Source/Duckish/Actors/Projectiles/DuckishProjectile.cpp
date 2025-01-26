@@ -50,7 +50,7 @@ APawn* ADuckishProjectile::GetOwningPawn() const
 }
 
 void ADuckishProjectile::OnCollisionComponentHit(UPrimitiveComponent* HitComponent, AActor* OtherActor,
-	UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
+                                                 UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
 	if (OnCollisionComponentHitEvent.IsBound())
 	{
@@ -73,6 +73,10 @@ void ADuckishProjectile::Launch(FVector Direction)
 	ProjectileMovementComponent->Velocity = LaunchSpeed * Direction;
 	ProjectileMovementComponent->Bounciness = Bounciness;
 
-	OnProjectileLaunched();
+	GetWorldTimerManager().SetTimer(TimeToLiveHandle, [this] {OnTimeToLiveEnded(); }, TimeToLive, false);
 }
 
+void ADuckishProjectile::OnTimeToLiveEnded()
+{
+	Destroy();
+}

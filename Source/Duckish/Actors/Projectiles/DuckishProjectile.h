@@ -35,10 +35,14 @@ protected:
 	float MaxSpeed = 3000.f;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Projectile | Movement", meta = (ClampMin = 0.f, UIMin = 0.f))
 	float Bounciness = 0.1f;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Projectile | Movement", meta = (ClampMin = 0.f, UIMin = 0.f))
+	float TimeToLive = 5.f;
 
 private:
 	APawn* GetOwningPawn() const;
-	virtual void OnProjectileLaunched() {}
+	virtual void OnTimeToLiveEnded();
 	UFUNCTION()
 	virtual void OnCollisionComponentHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
+
+	FTimerHandle TimeToLiveHandle;
 };

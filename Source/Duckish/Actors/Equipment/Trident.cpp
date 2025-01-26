@@ -113,6 +113,7 @@ void ATrident::ProcessProjectileHit(ADuckishProjectile* Projectile, const FVecto
 	FPointDamageEvent DamageEvent;
 	DamageEvent.HitInfo = Hit;
 	DamageEvent.ShotDirection = MovementDirection;
+	DamageEvent.DamageTypeClass = DamageType;
 	AActor* DamagedActor = Hit.GetActor();
 	if (IsValid(DamagedActor) && IsValid(CachedBasePawn))
 	{

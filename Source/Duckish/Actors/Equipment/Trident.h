@@ -30,6 +30,8 @@ protected:
 	FName SpawnSocketName = FName("SpawnSocket");
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (Category = "Trident | Shooting"))
 	float Damage = 1.f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (Category = "Trident | Shooting"))
+	TSubclassOf<UDamageType> DamageType = UDamageType::StaticClass();
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Trident | Animations")
 	UAnimMontage* PawnFireMontage;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Trident | Audio")
