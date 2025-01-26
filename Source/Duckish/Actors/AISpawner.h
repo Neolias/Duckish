@@ -20,6 +20,8 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (Category = "AISpawner", ClampMin = 1.f, UIMin = 1.f))
 	float SpawnRadius = 10000.f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (Category = "AISpawner", ClampMin = 1.f, UIMin = 1.f))
+	float AreaHeight = 4000.f;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (Category = "AISpawner", ClampMin = 0.1f, UIMin = 0.1f))
 	float SpawnRate = 5.f;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (Category = "AISpawner", ClampMin = 1, UIMin = 1))

@@ -12,7 +12,7 @@ void AAICat::Tick(float DeltaSeconds)
 
 	if (bIsEmerging)
 	{
-		CapsuleCollision->AddForce(FVector::UpVector * DeathEmergeForce);
+		CapsuleCollision->AddForce(FVector::UpVector * DeathEmergeForce * DeltaSeconds);
 	}
 }
 

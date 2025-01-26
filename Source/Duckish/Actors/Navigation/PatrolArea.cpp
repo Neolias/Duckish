@@ -15,8 +15,7 @@ AWaypoint* APatrolArea::GetRandomWaypoint()
 {
 	if (!ValidWaypoints.IsEmpty())
 	{
-		const int Index = FMath::RandRange(0, ValidWaypoints.Num() - 1);
-		return ValidWaypoints[Index];
+		return ValidWaypoints.Last();
 	}
 
 	return nullptr;
@@ -53,9 +52,10 @@ void APatrolArea::GenerateWaypoints()
 	{
 		const float PosX = FMath::RandRange(-AreaRadius, AreaRadius);
 		const float PosY = FMath::RandRange(-AreaRadius, AreaRadius);
-		const float PosZ = FMath::RandRange(0.f, AreaRadius);
+		const float PosZ = FMath::RandRange(0.f, AreaHeight);
 		const float Yaw = FMath::RandRange(-180.f, 180.f);
-		AWaypoint* NewWaypoint = GetWorld()->SpawnActor<AWaypoint>(WaypointClass, FVector(PosX, PosY, PosZ), FRotator(0.f, Yaw, 0.f), SpawnParameters);
+		FVector SpawnLocation = GetActorLocation() + FVector(PosX, PosY, PosZ);
+		AWaypoint* NewWaypoint = GetWorld()->SpawnActor<AWaypoint>(WaypointClass, SpawnLocation, FRotator(0.f, Yaw, 0.f), SpawnParameters);
 		if (IsValid(NewWaypoint))
 		{
 			NewWaypoint->AttachToActor(this, AttachmentRules);

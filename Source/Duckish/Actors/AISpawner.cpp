@@ -38,7 +38,8 @@ void AAISpawner::ExecuteSpawnTick()
 		const float PosY = FMath::RandRange(-SpawnRadius, SpawnRadius);
 		const float PosZ = FMath::RandRange(0.f, SpawnRadius);
 		const float Yaw = FMath::RandRange(-180.f, 180.f);
-		AAIPawn* NewAIPawn = GetWorld()->SpawnActor<AAIPawn>(AIPAwnClass, FVector(PosX, PosY, PosZ), FRotator(0.f, Yaw, 0.f), SpawnParameters);
+		FVector SpawnLocation = GetActorLocation() + FVector(PosX, PosY, PosZ);
+		AAIPawn* NewAIPawn = GetWorld()->SpawnActor<AAIPawn>(AIPAwnClass, SpawnLocation, FRotator(0.f, Yaw, 0.f), SpawnParameters);
 		if (IsValid(NewAIPawn))
 		{
 			NewAIPawn->SetPatrolArea(PatrolArea);
