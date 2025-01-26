@@ -74,7 +74,10 @@ void ATrident::MakeOneShot()
 
 	ShootProjectile();
 
-	GetWorld()->GetTimerManager().SetTimer(OnShotEndTimer, this, &ATrident::OnShotEnd, 60.f / FireRate, false);
+	if (IsValid(this))
+	{
+		GetWorld()->GetTimerManager().SetTimer(OnShotEndTimer, this, &ATrident::OnShotEnd, 60.f / FireRate, false);
+	}
 }
 
 void ATrident::OnShotEnd()

@@ -50,9 +50,10 @@ void AWaypoint::TriggerDeath()
 	if (PatrolArea.Get())
 	{
 		PatrolArea->CheckOutWaypoint(this);
-		SetActorTickEnabled(false);
-		SetActorEnableCollision(false);
-		StaticMeshComponent->SetVisibility(false, true);
+		//SetActorTickEnabled(false);
+		//SetActorEnableCollision(false);
+		//StaticMeshComponent->SetVisibility(false, true);
+		Destroy();
 	}
 }
 

@@ -78,5 +78,6 @@ void ADuckishProjectile::Launch(FVector Direction)
 
 void ADuckishProjectile::OnTimeToLiveEnded()
 {
-	SetProjectileActive(false);
+	//SetProjectileActive(false);
+	Destroy();
 }
