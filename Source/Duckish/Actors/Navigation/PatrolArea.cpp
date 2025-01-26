@@ -42,8 +42,6 @@ void APatrolArea::BeginPlay()
 
 void APatrolArea::GenerateWaypoints()
 {
-	ValidWaypoints.Reserve(NumberOfWaypoints);
-
 	FActorSpawnParameters SpawnParameters;
 	SpawnParameters.Owner = this;
 	SpawnParameters.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::DontSpawnIfColliding;
@@ -61,7 +59,7 @@ void APatrolArea::GenerateWaypoints()
 		{
 			NewWaypoint->AttachToActor(this, AttachmentRules);
 			NewWaypoint->SetPatrolArea(this);
-			ValidWaypoints.Push(NewWaypoint);
+			ValidWaypoints.Add(NewWaypoint);
 		}
 		else
 		{

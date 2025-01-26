@@ -38,6 +38,10 @@ protected:
 	USoundBase* FireSound;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Trident | Audio")
 	USoundBase* HitSound;
+	UFUNCTION(BlueprintNativeEvent)
+	void OnEnemyHit();
+	UFUNCTION(BlueprintNativeEvent)
+	void OnBubbleHit();
 
 
 	UFUNCTION()

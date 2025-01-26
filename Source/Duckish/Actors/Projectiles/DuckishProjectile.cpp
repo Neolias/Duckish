@@ -73,10 +73,10 @@ void ADuckishProjectile::Launch(FVector Direction)
 	ProjectileMovementComponent->Velocity = LaunchSpeed * Direction;
 	ProjectileMovementComponent->Bounciness = Bounciness;
 
-	GetWorldTimerManager().SetTimer(TimeToLiveHandle, [this] {OnTimeToLiveEnded(); }, TimeToLive, false);
+	GetWorldTimerManager().SetTimer(TimeToLiveHandle, this, &ADuckishProjectile::OnTimeToLiveEnded, TimeToLive, false);
 }
 
 void ADuckishProjectile::OnTimeToLiveEnded()
 {
-	Destroy();
+	SetProjectileActive(false);
 }

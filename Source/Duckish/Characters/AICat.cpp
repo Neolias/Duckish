@@ -39,5 +39,7 @@ void AAICat::TriggerDeath_Implementation()
 
 void AAICat::OnDeath()
 {
-	Destroy();
+	SetActorTickEnabled(false);
+	SetActorEnableCollision(false);
+	SkeletalMesh->SetVisibility(false, true);
 }

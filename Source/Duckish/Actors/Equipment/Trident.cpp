@@ -3,6 +3,8 @@
 
 #include "Trident.h"
 
+#include "Actors/Navigation/Waypoint.h"
+#include "Characters/AICat.h"
 #include "Characters/BasePawn.h"
 #include "Engine/DamageEvents.h"
 #include "Kismet/GameplayStatics.h"
@@ -39,6 +41,14 @@ void ATrident::StopFire()
 		GetWorld()->GetTimerManager().ClearTimer(OneShotTimer);
 	}
 	bIsFiring = false;
+}
+
+void ATrident::OnEnemyHit_Implementation()
+{
+}
+
+void ATrident::OnBubbleHit_Implementation()
+{
 }
 
 void ATrident::MakeOneShot()
@@ -118,6 +128,14 @@ void ATrident::ProcessProjectileHit(ADuckishProjectile* Projectile, const FVecto
 	if (IsValid(DamagedActor) && IsValid(CachedBasePawn))
 	{
 		DamagedActor->TakeDamage(Damage, DamageEvent, CachedBasePawn->GetController(), CachedBasePawn);
+		if (DamagedActor->IsA<AAICat>())
+		{
+			OnEnemyHit();
+		}
+		if (DamagedActor->IsA<AWaypoint>())
+		{
+			OnBubbleHit();
+		}
 	}
 
 	if (IsValid(HitSound))
