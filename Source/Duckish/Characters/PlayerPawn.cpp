@@ -6,6 +6,8 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "Camera/CameraComponent.h"
+#include "GameFramework/PlayerStart.h"
+#include "Kismet/GameplayStatics.h"
 
 APlayerPawn::APlayerPawn()
 {
@@ -13,6 +15,20 @@ APlayerPawn::APlayerPawn()
 	Camera->SetupAttachment(SkeletalMesh, CameraSocket);
 	Camera->bUsePawnControlRotation = true;
 	SkeletalMesh->SetOnlyOwnerSee(true);
+}
+
+void APlayerPawn::BeginPlay()
+{
+	Super::BeginPlay();
+
+	TArray<AActor*> FoundActors;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), APlayerStart::StaticClass(), FoundActors);
+
+	if (!FoundActors.IsEmpty())
+	{
+		SetActorLocation(FoundActors[0]->GetActorLocation());
+		SetActorRotation(FoundActors[0]->GetActorRotation());
+	}
 }
 
 void APlayerPawn::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
