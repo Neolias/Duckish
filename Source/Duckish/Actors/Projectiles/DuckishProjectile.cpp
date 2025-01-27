@@ -27,7 +27,7 @@ ADuckishProjectile::ADuckishProjectile()
 	ProjectileMovementComponent->Bounciness = Bounciness;
 	ProjectileMovementComponent->SetAutoActivate(false);
 
-	SetReplicates(true);
+	//SetReplicates(true);
 	SetReplicateMovement(true);
 	SetProjectileActive(false);
 }
